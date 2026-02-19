@@ -51,6 +51,12 @@
 }
 
 .header__menu a:hover {
+  color: var(--color-dark-gray);
+}
+
+.header__menu a.router-link-active {
+  color: var(--color-black);
+  border-bottom: 1px solid var(--color-black);
 }
 
 .header__hr {
@@ -64,6 +70,14 @@
   display: flex;
   align-items: center;
   gap: 40px;
+}
+
+.header__icons a {
   padding-bottom: 48px;
+}
+
+.header__icons a.router-link-active {
+  color: var(--color-black);
+  border-bottom: 1px solid var(--color-black);
 }
 </style>
