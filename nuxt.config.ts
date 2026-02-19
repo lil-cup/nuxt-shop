@@ -1,12 +1,20 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// nuxt.config.ts
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-
   modules: [
-    '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/image',
-    '@nuxt/scripts'
-  ]
-})
+    "@nuxt/eslint",
+    "@nuxt/fonts",
+    "@nuxt/image",
+    "@nuxt/scripts",
+    "@nuxt/icon",
+  ],
+  icon: {
+    customCollections: [
+      {
+        prefix: "icons",
+        dir: "./app/assets/icons",
+      },
+    ],
+  },
+});
