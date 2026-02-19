@@ -4,6 +4,29 @@ import "~/assets/styles/main.css";
 
 <template>
   <NuxtLayout>
-    <NuxtPage />
+    <div class="main">
+      <NuxtPage
+        :transition="{
+          name: 'page',
+          mode: 'out-in',
+        }"
+      />
+    </div>
   </NuxtLayout>
 </template>
+
+<style scoped>
+.main {
+  margin: o auto;
+  max-width: 1248px;
+  padding: 40px 0;
+}
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+</style>
