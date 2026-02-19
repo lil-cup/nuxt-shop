@@ -17,7 +17,7 @@ import "~/assets/styles/main.css";
 
 <style scoped>
 .main {
-  margin: o auto;
+  margin: 0 auto;
   max-width: 1248px;
   padding: 40px 0;
 }
