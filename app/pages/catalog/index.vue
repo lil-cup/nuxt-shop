@@ -5,7 +5,7 @@ import type { GetProductsResponse } from "~/types/product";
 const config = useRuntimeConfig();
 const API_URL = config.public.api_url;
 
-const select = ref("");
+const category_id = ref("");
 const selectDef = [
   {
     value: "",
@@ -13,14 +13,19 @@ const selectDef = [
   },
 ];
 
+const query = computed(() => {
+  return {
+    limit: 20,
+    offset: 0,
+    category_id: category_id.value || undefined,
+  };
+});
+
 const { data } = await useFetch<GetCategoriesResponse>(`${API_URL}/categories`);
 const { data: productsData } = await useFetch<GetProductsResponse>(
   `${API_URL}/products`,
   {
-    query: {
-      limit: 20,
-      offset: 0,
-    },
+    query,
   },
 );
 
@@ -40,7 +45,7 @@ const categoriesSelect = computed(() => {
     <div class="catalog">
       <div class="catalog__filter">
         <SelectFiled
-          v-model="select"
+          v-model="category_id"
           :options="selectDef.concat(categoriesSelect)"
         />
       </div>
