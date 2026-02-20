@@ -5,22 +5,22 @@ const config = useRuntimeConfig();
 const IMAGE_URL = config.public.image_url;
 
 const product = defineProps<Product>();
+const image = computed(() => `url(${IMAGE_URL}${product.images[0]})`);
 </script>
 
 <template>
-  <NuxtLink class="card" to="/">
-    <div
-      class="card__image"
-      :style="{
-        background: `url(${IMAGE_URL}${product.images[0]}) lightgray 50% / cover no-repeat;`,
-      }"
-    >
-      <span class="card__discount">-{{ product.discount }}%</span>
+  <NuxtLink class="card" :to="`/catalog/${product.id}`">
+    <div class="card__image">
+      <span v-if="product.discount > 0" class="card__discount">
+        -{{ product.discount }}%
+      </span>
     </div>
-    <div class="card__name">
-      {{ product.name }}
+    <div class="card__footer">
+      <div class="card__name">
+        {{ product.name }}
+      </div>
+      <div class="card__price">$ {{ product.price }}</div>
     </div>
-    <div class="card__price">$ {{ product.price }}</div>
   </NuxtLink>
 </template>
 
@@ -40,6 +40,9 @@ const product = defineProps<Product>();
   width: 100%;
   min-width: 320px;
   padding: 16px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: v-bind(image);
 }
 
 .card__discount {
@@ -48,6 +51,12 @@ const product = defineProps<Product>();
   padding: 2px 8px;
   font-size: 12px;
   color: var(--color-white-light);
+}
+
+.card__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .card__name {
