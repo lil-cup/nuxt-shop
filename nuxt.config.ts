@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       api_url: "",
+      image_url: "",
     },
   },
   modules: [
