@@ -1,20 +1,29 @@
 <script setup lang="ts">
 import type { GetCategoriesResponse } from "~/types/category";
-import type { Product } from "~/types/product";
+import type { GetProductsResponse } from "~/types/product";
 
 const config = useRuntimeConfig();
 const API_URL = config.public.api_url;
 
 const select = ref("");
-
-const { data } = await useFetch<GetCategoriesResponse>(`${API_URL}/categories`);
-
 const selectDef = [
   {
     value: "",
     label: "Категории",
   },
 ];
+
+const { data } = await useFetch<GetCategoriesResponse>(`${API_URL}/categories`);
+const { data: productsData } = await useFetch<GetProductsResponse>(
+  `${API_URL}/products`,
+  {
+    query: {
+      limit: 20,
+      offset: 0,
+    },
+  },
+);
+
 const categoriesSelect = computed(() => {
   return data.value
     ? data.value.categories.map((c) => ({
@@ -23,31 +32,6 @@ const categoriesSelect = computed(() => {
       }))
     : [];
 });
-
-const product: Product = {
-  id: 1,
-  name: "Lira Earrings",
-  price: 20,
-  short_description: "Элегантные золотистые серьги-кольца",
-  long_description:
-    "Отлично подойдут к любому гардеробу. Чистое золото высокой пробы, которое не оставит вас равнодушными к качеству изделия.",
-  sku: "12",
-  discount: 0,
-  images: [
-    "/images/jewelry/lira1.jpg",
-    "/images/jewelry/lira2.jpg",
-    "/images/jewelry/lira3.jpg",
-    "/images/jewelry/lira4.jpg",
-  ],
-  category_id: 1,
-  category: {
-    id: 1,
-    name: "Серьги",
-    alias: "earrings",
-  },
-  created_at: "2026-02-19T19:24:41Z",
-  updated_at: "2026-02-19T19:24:41Z",
-};
 </script>
 
 <template>
@@ -60,8 +44,12 @@ const product: Product = {
           :options="selectDef.concat(categoriesSelect)"
         />
       </div>
-      <div>
-        <CatalogGard v-bind="product" />
+      <div class="catalog__grid">
+        <CatalogGard
+          v-for="product in productsData?.products"
+          :key="product.id"
+          v-bind="product"
+        />
       </div>
     </div>
   </div>
@@ -79,5 +67,13 @@ const product: Product = {
 
 .catalog__filter {
   width: 260px;
+}
+
+.catalog__grid {
+  display: flex;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px 12px;
+  flex-wrap: wrap;
 }
 </style>

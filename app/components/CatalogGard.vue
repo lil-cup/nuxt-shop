@@ -38,7 +38,6 @@ const image = computed(() => `url(${IMAGE_URL}${product.images[0]})`);
   aspect-ratio: 1/1;
   border-radius: 4px;
   width: 100%;
-  min-width: 320px;
   padding: 16px;
   background-repeat: no-repeat;
   background-size: cover;
