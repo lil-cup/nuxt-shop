@@ -6,14 +6,23 @@ const IMAGE_URL = config.public.image_url;
 
 const product = defineProps<Product>();
 const image = computed(() => `url(${IMAGE_URL}${product.images[0]})`);
+
+const isHovered = ref(false);
 </script>
 
 <template>
-  <NuxtLink class="card" :to="`/catalog/${product.id}`">
+  <NuxtLink
+    class="card"
+    :to="`/catalog/${product.id}`"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
+  >
     <div class="card__image">
       <span v-if="product.discount > 0" class="card__discount">
         -{{ product.discount }}%
       </span>
+      <span v-else></span>
+      <AddFavorite :id="product.id" :is-shown="isHovered" />
     </div>
     <div class="card__footer">
       <div class="card__name">
@@ -35,6 +44,9 @@ const image = computed(() => `url(${IMAGE_URL}${product.images[0]})`);
 }
 
 .card__image {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
   aspect-ratio: 1/1;
   border-radius: 4px;
   width: 100%;
