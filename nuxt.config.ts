@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/sitemap",
   ],
   icon: {
     customCollections: [
@@ -24,6 +25,14 @@ export default defineNuxtConfig({
         dir: "./app/assets/icons",
       },
     ],
+  },
+  sitemap: {
+    sources: ["/api/sitemap/urls"],
+    defaults: {
+      lastmod: new Date().toISOString(),
+      priority: 0.5,
+      changefreq: "weekly",
+    },
   },
   app: {
     head: {
