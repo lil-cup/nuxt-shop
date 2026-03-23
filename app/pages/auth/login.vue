@@ -8,6 +8,7 @@ definePageMeta({
 const API_URL = useAPI();
 const email = ref<string>();
 const password = ref<string>();
+const authStore = useAuthStore();
 
 async function login() {
   const data = await $fetch<LoginResponse>(`${API_URL}/auht/login`, {
@@ -17,8 +18,7 @@ async function login() {
       password: password.value,
     },
   });
-
-  console.log(data);
+  authStore.setToken(data.token);
 }
 </script>
 
