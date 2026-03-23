@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import type { LoginResponse } from "~/types/auth";
 
-definePageMeta({
-  layout: "auth",
-});
-
 const API_URL = useAPI();
 const email = ref<string>();
 const password = ref<string>();
