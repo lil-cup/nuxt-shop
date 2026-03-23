@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { Product } from "~/types/product";
 
+useSeoMeta({
+  title: "Избранное",
+});
 const API_URL = useAPI();
 const favoriteStore = useFavoritesStore();
 const products = ref<Product[]>();

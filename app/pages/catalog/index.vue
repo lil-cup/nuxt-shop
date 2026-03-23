@@ -3,6 +3,11 @@ import { useDebounceFn } from "@vueuse/core";
 import type { GetCategoriesResponse } from "~/types/category";
 import type { GetProductsResponse } from "~/types/product";
 
+useSeoMeta({
+  title: "Каталог товаров",
+  description: "Список наших товаров.",
+  ogDescription: "Список наших товаров.",
+});
 const API_URL = useAPI();
 const route = useRoute();
 const router = useRouter();

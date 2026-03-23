@@ -2,6 +2,9 @@
 definePageMeta({
   layout: "auth",
 });
+useSeoMeta({
+  title: "Регистрация",
+});
 </script>
 <template>
   <div class="app">

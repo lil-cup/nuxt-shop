@@ -2,6 +2,9 @@
 definePageMeta({
   layout: "auth",
 });
+useSeoMeta({
+  title: "Восстановление",
+});
 </script>
 <template>
   <div class="app">

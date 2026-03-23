@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { LoginResponse } from "~/types/auth";
-
+useSeoMeta({
+  title: "Вход",
+});
 const API_URL = useAPI();
 const email = ref<string>();
 const password = ref<string>();
