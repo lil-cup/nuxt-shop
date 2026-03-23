@@ -28,6 +28,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Магазин",
+      titleTemplate: "%s | Shoppe",
       htmlAttrs: {
         lang: "ru",
       },
