@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
     "@nuxtjs/sitemap",
+    "@nuxtjs/robots",
   ],
   icon: {
     customCollections: [
@@ -33,6 +34,9 @@ export default defineNuxtConfig({
       priority: 0.5,
       changefreq: "weekly",
     },
+  },
+  robots: {
+    disallow: ["/account"],
   },
   app: {
     head: {
