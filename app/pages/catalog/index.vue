@@ -3,8 +3,7 @@ import { useDebounceFn } from "@vueuse/core";
 import type { GetCategoriesResponse } from "~/types/category";
 import type { GetProductsResponse } from "~/types/product";
 
-const config = useRuntimeConfig();
-const API_URL = config.public.api_url;
+const API_URL = useAPI();
 const route = useRoute();
 const router = useRouter();
 const category_id = ref(route.query.category_id?.toString() ?? "");

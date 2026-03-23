@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { Product } from "~/types/product";
 
+const API_URL = useAPI();
 const favoriteStore = useFavoritesStore();
-const config = useRuntimeConfig();
-const API_URL = config.public.api_url;
 const products = ref<Product[]>();
 
 watchEffect(async () => {

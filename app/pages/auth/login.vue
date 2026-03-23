@@ -1,7 +1,25 @@
 <script setup lang="ts">
+import type { LoginResponse } from "~/types/auth";
+
 definePageMeta({
   layout: "auth",
 });
+
+const API_URL = useAPI();
+const email = ref<string>();
+const password = ref<string>();
+
+async function login() {
+  const data = await $fetch<LoginResponse>(`${API_URL}/auht/login`, {
+    method: "POST",
+    body: {
+      email: email.value,
+      password: password.value,
+    },
+  });
+
+  console.log(data);
+}
 </script>
 
 <template>
@@ -9,11 +27,16 @@ definePageMeta({
     <h1>Мой аккаунт</h1>
     <form class="login-form">
       <div class="login-form__fileds">
-        <InputFiled variant="gray" placeholder="Email" />
-        <InputFiled variant="gray" placeholder="Пароль" type="password" />
+        <InputFiled v-model="email" variant="gray" placeholder="Email" />
+        <InputFiled
+          v-model="password"
+          variant="gray"
+          placeholder="Пароль"
+          type="password"
+        />
       </div>
       <div class="login-form__actions">
-        <ActionButton>Вход</ActionButton>
+        <ActionButton @click.stop.prevent="login">Вход</ActionButton>
         <NuxtLink to="/auth/restore">Забыли пароль?</NuxtLink>
       </div>
     </form>
